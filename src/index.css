@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+li{
+  list-style: none;
+}
+ul{
+  margin:0 ;
+  padding: 0;
+}
+.ck-file-dialog-button{
+  display: none !important;
+}
+
+
+/* ck ck-content ck-editor__editable ck-rounded-corners  ck-blurred */
+
+
+.ck-read-only{
+  border:none !important;
+  padding: 0 !important;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+}

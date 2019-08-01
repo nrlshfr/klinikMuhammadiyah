@@ -1,0 +1,16 @@
+.spinner span{
+    font-size: 400px !important;
+}
+.spinner span i{
+    width: 100px !important;
+    height: 100px !important;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+}

@@ -1,0 +1,44 @@
+.navbar{
+    
+    .topNavbar{
+        transition: .4s;
+    }
+    .bottomNavbar{
+        transition: .4s;
+    }
+    ul{
+
+        li{
+            font-size: 16px;
+        }
+    }
+}
+
+.mobileNav{
+    transition: .3s;
+
+    li{
+        width:100%;
+        transition: .3s;
+        &:hover{
+            background: #207dff;
+            color:#fff ;
+        }
+    }
+}
+
+@media only screen and (max-width:800px){
+    .navbar{
+        .topNavbar{
+            p{
+                font-size: 12px;
+            }
+        }
+    }
+    .navItems{
+        display: none !important;
+    }
+    .hamburger{
+        display: block !important;
+    }
+}
