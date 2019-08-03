@@ -1,5 +1,5 @@
 .navbar{
-    
+    position: fixed;
     .topNavbar{
         transition: .4s;
     }
@@ -10,6 +10,7 @@
 
         li{
             font-size: 16px;
+            margin:0 !important;
         }
     }
 }
@@ -29,6 +30,7 @@
 
 @media only screen and (max-width:800px){
     .navbar{
+        position: relative !important;
         .topNavbar{
             p{
                 font-size: 12px;
@@ -40,5 +42,8 @@
     }
     .hamburger{
         display: block !important;
+    }
+    .klinikMuhammadiyah{
+        font-size: 15px !important;                
     }
 }

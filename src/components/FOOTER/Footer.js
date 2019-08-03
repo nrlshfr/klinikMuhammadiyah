@@ -2,29 +2,33 @@ import React from 'react';
 import bg from '../../assets/footer-bg.jpg';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
+import './Footer.modules.scss';
 
 const Footer = () => {
     return (
         <div style={{
             width: '100%',
-            height: 300,
             backgroundImage: `url(${bg})`,
             backgroundSize: 'cover',
             position: 'relative',
-            backgroundPositionY: -50,
+            minHeight: 400,
             backgroundRepeat: 'no-repeat'
         }}>
             <div style={{
-                width: '100%', position: 'absolute', bottom: 0, background: '#f1f1f166', zIndex: 10, height: 300,
+                width: '100%', position: 'absolute', bottom: 0, background: '#f1f1f1c7', zIndex: 10, height: 400,
                 display: 'flex', alignItems: 'center', flexDirection: 'column'
             }}>
-                <div style={{ padding: '20px', width: '100%', display: 'flex', justifyContent: 'space-between' }}>
-                    <div>
+                <div className='footerContent' style={{
+                    padding: '20px', width: '100%', display: 'flex', justifyContent: 'space-between',
+                    flexWrap: 'wrap'
+                }}>
+                    <div className='slogan'>
                         <h3>KLINIK MUHAMMADIYAH</h3>
                         <p style={{ width: 150 }}>
                             Far far away, behind the word mountains, far from the countries.
                         </p>
                     </div>
+
                     <div style={{ display: 'flex' }}>
                         <div style={{ marginRight: 50 }}>
                             <h3>Informasi Kontak</h3>

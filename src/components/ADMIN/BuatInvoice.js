@@ -119,13 +119,25 @@ const BuatInvoice = () => {
                         }>Masukkan Data</Button>
                 </Form.Item>
                 <Form.Item>
+                    <label>Nomor Invoice</label>
                     <Input value={nomorInvoice} onChange={e => setNomorInvoice(e.target.value)} placeholder='Nomor Invoice' />
+
+                    <label>Nomor Ref</label>
                     <Input value={nomorRef} onChange={e => setNomorRef(e.target.value)} placeholder='Nomor Ref' />
 
+                    <label>Nama Pasien</label>
                     <Input value={namaPasien} onChange={e => setNamaPasien(e.target.value)} placeholder='Nama Pasien' />
+
+                    <label>Alamat Invoice</label>
                     <Input value={Alamat} onChange={e => setAlamat(e.target.value)} placeholder='Alamat' />
+
+                    <label>Kota</label>
                     <Input value={Kota} onChange={e => setKota(e.target.value)} placeholder='Kota' />
+
+                    <label>Provinsi</label>
                     <Input value={Provinsi} onChange={e => setProvinsi(e.target.value)} placeholder='Provinsi' />
+
+                    <label>Kode pos</label>
                     <Input value={kodePos} onChange={e => setKodePos(e.target.value)} placeholder='Kode pos' />
 
 

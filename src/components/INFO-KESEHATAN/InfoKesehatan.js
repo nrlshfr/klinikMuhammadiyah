@@ -27,7 +27,8 @@ const InfoKesehatan = () => {
     const [loading, setLoading] = useState(true);
 
     return (
-        <div style={{ paddingTop: 150, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div className='pala' style={{ paddingTop: 150, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <h1>Info Kesehatan</h1>
             {loading ?
                 <Card loading style={{ width: '80%' }} />
                 :
@@ -39,9 +40,9 @@ const InfoKesehatan = () => {
                         boxShadow: '1px 2px 8px rgba(0,0,0,.2)',
                         height: 200,
                         overflow: 'hidden',
-                        marginBottom: 20
+                        marginBottom: 20,
                     }}>
-                        <div style={{ width: '40%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <div className='artikelImg' style={{ width: '40%', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
                             <img src={item.headerIMG} alt="" style={{ width: '100%' }} />
                         </div>
                         <div style={{ padding: '20px' }}>

@@ -8,15 +8,7 @@ import './ArtikelDetail.modules.scss';
 
 const ArtikelDetail = () => {
     useEffect(() => {
-        getArtikelDetail();
-    }, [])
-
-    const path = window.location.pathname.slice(34, window.location.pathname.length);
-
-    const [item, setItem] = useState();
-    const [loading, setLoading] = useState(true);
-
-    const getArtikelDetail = () => {
+        const path = window.location.pathname.slice(34, window.location.pathname.length);
         firebase.firestore().collection('semua_artikel').doc(path).get()
             .then((snap) => {
                 setItem(snap.data());
@@ -26,10 +18,17 @@ const ArtikelDetail = () => {
                 setLoading(false);
                 message.error(err.message);
             })
-    }
+    }, []);
+
+
+
+    const [item, setItem] = useState();
+    const [loading, setLoading] = useState(true);
+
+
 
     return (
-        <div style={{
+        <div className='pala' style={{
             paddingTop: 150
         }}>
             {loading ?

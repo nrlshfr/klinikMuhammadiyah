@@ -67,7 +67,7 @@ const Kontak = () => {
     }
 
     return (
-        <div style={{ paddingTop: 150 }}>
+        <div className='pala' style={{ paddingTop: 150 }}>
             <h1 style={{ textAlign: 'center', fontSize: '3rem', margin: '50px 0' }}>KONTAK</h1>
             <Row style={{ justifyContent: 'space-between', display: 'flex', flexWrap: 'wrap', marginBottom: 50 }}>
                 {allKontak.map((item, index) => (
@@ -92,31 +92,36 @@ const Kontak = () => {
 
             <Row>
                 <Col sm={24} md={12} style={{ padding: '20px 50px', }} >
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3960.883163646827!2d107.6186251!3d-6.9045727!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e64b004ff221%3A0x1444a06ec346de5!2sSejiwa!5e0!3m2!1sen!2sid!4v1563799948056!5m2!1sen!2sid" width="100%" height="450" frameborder="0" style={{ border: 0 }}></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.6062028127417!2d106.7521233!3d-6.5712831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c4c881e843dd%3A0x9399f21666429b2!2sBalai+Pengobatan+Muhammadiyah+Kota+Bogor!5e0!3m2!1sen!2sid!4v1564644234426!5m2!1sen!2sid" title='maps' width="100%" height="450" frameborder="0" style={{ border: 0 }}></iframe>
                 </Col>
 
                 <Col sm={24} md={12} style={{ padding: '20px 50px', }}>
+                    <h1>Kirim Pesan</h1>
                     <Form
                         onSubmit={submitPesan}>
                         <Form.Item>
                             <Input
+                                addonBefore='Nama'
                                 value={nama}
                                 onChange={e => setNama(e.target.value)}
                                 placeholder='Nama' />
                         </Form.Item>
                         <Form.Item>
                             <Input
+                                addonBefore='Email'
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 placeholder='Email' type='email' />
                         </Form.Item>
                         <Form.Item>
                             <Input
+                                addonBefore='Subjek'
                                 value={subject}
                                 onChange={e => setSubject(e.target.value)}
                                 placeholder='Subjek' />
                         </Form.Item>
                         <Form.Item>
+                            <label>Pesan</label>
                             <Input.TextArea style={{ height: 150 }}
                                 value={pesan}
                                 onChange={e => setPesan(e.target.value)}

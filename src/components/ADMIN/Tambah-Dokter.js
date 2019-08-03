@@ -54,7 +54,7 @@ const TambahDokter = () => {
 
     const resetField = () => {
         formField.map(item => {
-            item.onChange('');
+            return item.onChange('');
         })
         setInputJadwal('');
         setJadwal([]);
@@ -91,18 +91,17 @@ const TambahDokter = () => {
             <Form style={{ width: '70%', margin: '0 auto', marginTop: 50, }}>
                 <h1 style={{ fontSize: '2rem' }}>Tambah Dokter</h1>
                 {formField.map((item, index) => {
-                    if (item.placeholder === 'Jadwal') {
-                        return;
-                    } else {
+                    if (item.placeholder !== 'Jadwal') {
                         return (
                             <Form.Item key={index}>
+                                <label>{item.placeholder}</label>
                                 <Input placeholder={item.placeholder}
                                     type={item.placeholder === 'No HP' ? 'number' : 'text'}
                                     value={item.value}
                                     onChange={e => item.onChange(e.target.value)} />
                             </Form.Item>
                         )
-                    }
+                    } else return null;
                 })}
                 <h5>Jadwal</h5>
                 {Jadwal.map((item, index) => (

@@ -31,3 +31,17 @@ ul{
 input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
 }
+.navActive{
+  font-weight: bolder !important;
+}
+
+
+
+@media only screen and (max-width:800px){
+  .pala{
+    padding-top: 0 !important;
+  }
+  .artikelImg{
+    display: none !important;
+  }
+}

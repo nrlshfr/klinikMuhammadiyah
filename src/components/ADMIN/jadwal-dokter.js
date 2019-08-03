@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Tag, Button, message, Card, Popconfirm } from 'antd';
+import { Table, Button, message, Popconfirm } from 'antd';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
@@ -57,16 +57,28 @@ const JadwalDokter = () => {
             dataIndex: 'Jadwal',
             key: 'Jadwal',
             render: tags => (
-                <span>
-                    {tags.map(tag => {
+                <div>
+                    {tags.map((tag, index) => {
                         return (
-                            <Tag color='green' key={tag}>
-                                {tag.toUpperCase()}
-                            </Tag>
+                            <p key={index}>{tag.toUpperCase()}</p>
                         );
                     })}
-                </span>
+                </div>
             ),
+        },
+        {
+            title: 'Nama Pasien',
+            dataIndex: 'semua_pasien',
+            key: 'semua_pasien',
+            render: nama => (
+                <div>
+                    {nama.map((items, index) => {
+                        return (
+                            <p key={index}>{items.Nama} {items.Urutan}</p>
+                        );
+                    })}
+                </div>
+            )
         },
         {
             title: 'Action',
@@ -91,9 +103,9 @@ const JadwalDokter = () => {
 
     const [data, setData] = useState([]);
     return (
-        <div style={{ paddingTop: 50, margin: '0 auto', width: '70%' }}>
+        <div style={{ paddingTop: 50, margin: '0 auto', width: '90%' }}>
             <h1 style={{ fontSize: '2rem' }}>Jadwal Dokter</h1>
-            {loading ? <Card loading /> : <Table columns={columns} dataSource={data} />}
+            <Table columns={columns} dataSource={data} loading={loading} bordered />
         </div>
     );
 }

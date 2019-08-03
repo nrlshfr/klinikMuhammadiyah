@@ -1,0 +1,79 @@
+.headerBG{
+    min-height: 100vh;
+}
+.fakta2{
+    display: flex;
+}
+
+
+@media only screen and (max-width:800px){
+    .headerBG{
+        min-height: 50vh;
+    }
+    .section2{
+        
+        .frameHome2{
+            align-items: flex-start !important;
+            min-height: auto !important;
+
+            img{
+                width: 100% !important;
+            }
+        }        
+        .mengapa{            
+            min-height: auto !important;
+
+            h1{
+                font-size: 35px !important;
+                text-align: center;
+                width: 100% !important;
+                margin-top: 50px !important;
+            }
+            p{
+                width: 100% !important;
+                text-align: center;
+            }
+        }        
+    }
+    .section3{
+
+        .framePoliLayanan{
+            height: 300px !important;
+
+            p{
+                text-align: center;
+                font-size: 25px !important;
+            }
+        }
+    }
+    .fakta{
+        .fakta2{
+            flex-direction: column !important;
+            .stats{
+                div{
+                    width: 100% !important;
+
+                    h1{
+                        font-size: 20px !important;
+                    }
+                    p{
+                        font-size: 14px !important;   
+                    }
+                }
+            }
+        }
+        div{
+            
+            .judul{
+                justify-content: flex-start !important;
+                min-height: 200px !important;                
+                h3{
+                    margin-top: 50px !important;
+                }
+                h1{
+                    font-size: 1.5em !important;                    
+                } 
+            }
+        }
+    }
+}
