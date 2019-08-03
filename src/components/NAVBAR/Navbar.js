@@ -37,7 +37,7 @@ const Navbar = ({ auth }) => {
         <Menu>
             <Menu.Item key="0">
                 <NavLink to={auth ? `/Jadwal-Konsultasi/${firebase.auth().currentUser.uid}` : ''}>
-                    <p style={{ cursor: 'pointer', margin: 0 }}>Jadwal Konsultasi</p>
+                    <p onClick={() => setMobileNav(false)} style={{ cursor: 'pointer', margin: 0 }}>Jadwal Konsultasi</p>
                 </NavLink>
             </Menu.Item>
             <Menu.Item key="1">
@@ -134,14 +134,14 @@ const Navbar = ({ auth }) => {
                 <li style={{ padding: '10px 0', textAlign: 'center' }} onClick={() => setMobileNav(false)}>
                     <NavLink activeClassName='navActive' to='/kontak'>Kontak</NavLink>
                 </li>
-                <li style={{ padding: '10px 0', textAlign: 'center' }} onClick={() => setMobileNav(false)}>
+                <li style={{ padding: '10px 0', textAlign: 'center' }}>
                     {auth ?
                         <Dropdown overlay={menu} trigger={['click']}>
                             <p className="ant-dropdown-link" style={{ color: '#1890ff' }} >
                                 {firebase.auth().currentUser.displayName} <Icon type="down" />
                             </p>
                         </Dropdown>
-                        : <NavLink activeClassName='navActive' to='/masuk'>Masuk</NavLink>}
+                        : <NavLink onClick={() => setMobileNav(false)} activeClassName='navActive' to='/masuk'>Masuk</NavLink>}
                 </li>
             </ul>
         </nav>

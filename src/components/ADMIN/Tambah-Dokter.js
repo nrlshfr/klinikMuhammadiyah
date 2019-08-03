@@ -73,7 +73,9 @@ const TambahDokter = () => {
                 Poli: Poli,
                 Alamat: Alamat,
                 NoHP: NoHP,
-                Jadwal: Jadwal
+                Jadwal: Jadwal,
+                semua_pasien: [],
+                key: ID
             })
                 .then(() => {
                     message.success('Dokter Ditambahkan');

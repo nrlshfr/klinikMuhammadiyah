@@ -48,11 +48,6 @@ const JadwalDokterUser = ({ auth }) => {
             key: 'Poli',
         },
         {
-            title: 'No HP',
-            dataIndex: 'NoHP',
-            key: 'NoHP',
-        },
-        {
             title: 'Jadwal',
             dataIndex: 'Jadwal',
             key: 'Jadwal',
@@ -60,7 +55,7 @@ const JadwalDokterUser = ({ auth }) => {
                 <div >
                     {tags.map((tag, index) => {
                         return (
-                            <p key={index}>{tag.toUpperCase()}</p>
+                            <p className='isiJadwal' key={index}>{tag.toUpperCase()}</p>
                         );
                     })}
                 </div>
@@ -70,7 +65,7 @@ const JadwalDokterUser = ({ auth }) => {
             title: 'Buat Janji',
             dataIndex: 'buatJanji',
             key: 'buatJanji',
-            fixed: 'right',
+
             render: (text, index) => (
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                     <Button
@@ -99,7 +94,7 @@ const JadwalDokterUser = ({ auth }) => {
         ref.get()
             .then((snap) => {
                 const sample = snap.data().semua_pasien;
-                if (sample.length === 30) {
+                if (sample.length <= 30) {
                     const sampleDokter = [];
                     sampleDokter.push({ namaDokter: modalData.Nama, Poli: modalData.Poli, urutan: sample.length + 1 });
                     sample.push({

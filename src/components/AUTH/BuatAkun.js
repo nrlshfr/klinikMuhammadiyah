@@ -38,7 +38,7 @@ const BuatAkun = () => {
     }
 
     return (
-        <div style={{ paddingTop: 150, margin: '0 0 50px 0' }}>
+        <div className='pala' style={{ paddingTop: 150, margin: '0 0 50px 0' }}>
             <div style={{
                 minHeight: '80vh',
                 display: 'flex',

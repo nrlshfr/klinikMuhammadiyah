@@ -27,13 +27,13 @@ const InfoKesehatan = () => {
     const [loading, setLoading] = useState(true);
 
     return (
-        <div className='pala' style={{ paddingTop: 150, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div className='pala' style={{ paddingTop: 150, display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh' }}>
             <h1>Info Kesehatan</h1>
             {loading ?
                 <Card loading style={{ width: '80%' }} />
                 :
 
-                semuaArtikel.map((item, index) => (
+                semuaArtikel.length === 0 ? <h3>Belum ada artikel</h3> : semuaArtikel.map((item, index) => (
                     <div key={index} style={{
                         display: 'flex',
                         width: '80%',
