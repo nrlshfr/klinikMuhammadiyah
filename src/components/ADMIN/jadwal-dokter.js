@@ -74,7 +74,7 @@ const JadwalDokter = () => {
                 <div>
                     {nama.map((items, index) => {
                         return (
-                            <p key={index}>{items.Nama} {items.Urutan}</p>
+                            <p style={{ padding: 10, borderBottom: '1px solid' }} key={index}>{index + 1}. {items} </p>
                         );
                     })}
                 </div>

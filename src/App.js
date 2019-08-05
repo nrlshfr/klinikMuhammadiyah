@@ -42,11 +42,15 @@ const App = () => {
 
     const refTanggal = firebase.firestore().collection('tanggal').doc('tanggal');
     const refDokter = firebase.firestore().collection('nama_dokter');
+    const refUser = firebase.firestore().collection('data_pasien');
     refTanggal.get().then(snap => {
       if (snap.data().tanggal !== new Date().getDate()) {
         refTanggal.set({ tanggal: new Date().getDate() })
         refDokter.get().then(snapshot => snapshot.forEach(child => {
           refDokter.doc(child.id).set({ semua_pasien: [] }, { merge: true })
+        }))
+        refUser.get().then(snapUser => snapUser.forEach(childUser => {
+          refUser.doc(childUser.id).set({ jadwalKonsultasi: { DokterID: '', Poli: '', namaDokter: '' } }, { merge: true })
         }))
       }
     });

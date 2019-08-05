@@ -89,44 +89,40 @@ const JadwalDokterUser = ({ auth }) => {
 
     const BUATJANJI = () => {
         setLoadingModal(true);
-        const ref = firebase.firestore().collection('nama_dokter').doc(modalData.ID);
+        const refDokter = firebase.firestore().collection('nama_dokter').doc(modalData.ID);
         const refPasien = firebase.firestore().collection('data_pasien').doc(firebase.auth().currentUser.uid);
-        ref.get()
-            .then((snap) => {
-                const sample = snap.data().semua_pasien;
-                if (sample.length <= 30) {
-                    const sampleDokter = [];
-                    sampleDokter.push({ namaDokter: modalData.Nama, Poli: modalData.Poli, urutan: sample.length + 1 });
-                    sample.push({
-                        Nama: firebase.auth().currentUser.displayName,
-                        Urutan: sample.length + 1
-                    });
-                    ref.set({ semua_pasien: sample }, { merge: true });
-                    refPasien.set({ nama_dokter: sampleDokter }, { merge: true })
-                        .then(() => {
-                            message.success('Janji telah dibuat');
-                            setVisibleModal(false);
-                            setModalData({
-                                ID: '',
-                                Nama: '',
-                                Poli: ''
-                            });
-                            setLoadingModal(false);
-                        })
-                } else {
-                    message.warning('Kuota janji dokter ini sudah penuh');
-                    setLoading(false);
-                }
-
-            })
-            .catch(err => {
-                message.error(err.message);
+        refDokter.get().then(snap => {
+            const sample = snap.data().semua_pasien;
+            if (sample.length !== 30) {
+                sample.push(firebase.auth().currentUser.displayName);
+                refDokter.set({ semua_pasien: sample }, { merge: true })
+                    .then(() => {
+                        refPasien.set({
+                            jadwalKonsultasi: {
+                                namaDokter: modalData.Nama,
+                                Poli: modalData.Poli,
+                                DokterID: modalData.ID
+                            }
+                        }, { merge: true })
+                    })
+                    .then(() => {
+                        setLoadingModal(false);
+                        message.success('Janji konsultasi telah dibuat');
+                    })
+                    .catch(err => {
+                        message.error(err.message);
+                        setLoadingModal(false);
+                    })
+            } else {
+                message.warning('Kuota janji temu dokter ini sudah penuh');
                 setLoadingModal(false);
-            })
+            }
+        })
+
     }
     return (
         <div className='pala' style={{ paddingTop: 150, minHeight: '100vh' }}>
-            <div style={{
+            <div className='pala' style={{
                 paddingTop: 50, margin: '50px 0', width: '100%', justifyContent: 'flex-start',
                 display: 'flex', flexDirection: 'column', alignItems: 'center'
             }}>

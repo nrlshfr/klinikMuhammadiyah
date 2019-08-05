@@ -28,8 +28,12 @@ const BuatAkun = () => {
                     namalengkap,
                     nohandphone,
                     gender,
+                    nama_dokter: []
                 })
                 setLoading(false);
+            })
+            .then(() => {
+                window.location.pathname = '/';
             })
             .catch(err => {
                 message.error(err.message);
