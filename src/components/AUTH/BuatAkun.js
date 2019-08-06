@@ -17,23 +17,24 @@ const BuatAkun = () => {
     const SIGNUP = (e) => {
         e.preventDefault();
         setLoading(true);
-
         firebase.auth().createUserWithEmailAndPassword(email, pass)
             .then(() => {
-                firebase.auth().currentUser.updateProfile({
-                    displayName: namalengkap
-                })
                 firebase.firestore().collection('data_pasien').doc(firebase.auth().currentUser.uid).set({
                     email,
                     namalengkap,
                     nohandphone,
                     gender,
-                    nama_dokter: []
+                    jadwalKonsultasi: {}
                 })
-                setLoading(false);
-            })
-            .then(() => {
-                window.location.pathname = '/';
+                    .then(() => {
+                        firebase.auth().currentUser.updateProfile({
+                            displayName: namalengkap
+                        })
+                            .then(() => {
+                                window.location.pathname = '/';
+                            })
+                        setLoading(false);
+                    })
             })
             .catch(err => {
                 message.error(err.message);

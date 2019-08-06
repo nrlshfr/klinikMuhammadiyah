@@ -35,9 +35,8 @@ const App = () => {
       } else {
         setReady(true);
         setAuth(false);
-
-
       }
+
     })
 
     const refTanggal = firebase.firestore().collection('tanggal').doc('tanggal');

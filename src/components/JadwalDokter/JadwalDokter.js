@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, message, Modal } from 'antd';
+import { Table, Button, message, Modal, Popconfirm } from 'antd';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -8,6 +8,7 @@ import './JadwalDokter.modules.scss';
 const JadwalDokterUser = ({ auth }) => {
     useEffect(() => {
         getJadwal();
+
 
     }, [])
     const [loading, setLoading] = useState(true);
@@ -21,6 +22,7 @@ const JadwalDokterUser = ({ auth }) => {
 
 
     const getJadwal = () => {
+        setLoading(true);
         const data = [];
         firebase.firestore().collection('nama_dokter').orderBy('Nama').get()
             .then((snap) => {
@@ -30,11 +32,23 @@ const JadwalDokterUser = ({ auth }) => {
                 setData(data);
                 setLoading(false);
             })
+            .then(() => {
+                getSudahJanji();
+            })
             .catch((err) => {
-                message.error(err.message);
+                err.message !== "Cannot read property 'uid' of null" ? message.error(err.message) : console.log('');
                 setLoading(false);
             })
     }
+
+
+    const getSudahJanji = () => {
+        firebase.firestore().collection('data_pasien').doc(firebase.auth().currentUser.uid).get()
+            .then(snap => setListSudahJanji(snap.data().jadwalKonsultasi.DokterID))
+            .catch(err => message(err.message))
+
+    }
+
 
     const columns = [
         {
@@ -68,16 +82,26 @@ const JadwalDokterUser = ({ auth }) => {
 
             render: (text, index) => (
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                    <Button
-                        onClick={auth ? () => {
-                            setVisibleModal(true);
-                            setModalData({
-                                ID: index.ID,
-                                Nama: index.Nama,
-                                Poli: index.Poli
-                            })
-                        } : () => window.location.pathname = '/masuk'}
-                        style={{ margin: '0 auto' }} type='primary'>Buat Janji</Button>
+                    {listSudahJanji !== '' ? index.ID === listSudahJanji ?
+                        <Popconfirm title='Batalkan janji dengan dokter ini?' onConfirm={() => batalJanji(index)}>
+                            <Button
+                                style={{ margin: '0 auto' }} type='danger'>Batalkan Janji</Button>
+                        </Popconfirm>
+                        :
+                        <Button
+                            onClick={() => message.warn('Anda telah membuat janji dengan dokter lain, jika ingin membuat janji dengan dokter ini silahkan batalkan janji dengan dokter sebelumnya')}
+                            style={{ margin: '0 auto' }} type='ghost'>Buat Janji</Button>
+                        :
+                        <Button
+                            onClick={auth ? () => {
+                                setVisibleModal(true);
+                                setModalData({
+                                    ID: index.ID,
+                                    Nama: index.Nama,
+                                    Poli: index.Poli
+                                })
+                            } : () => window.location.pathname = '/masuk'}
+                            style={{ margin: '0 auto' }} type='primary'>Buat Janji</Button>}
                 </div>
             ),
         }
@@ -85,12 +109,13 @@ const JadwalDokterUser = ({ auth }) => {
 
     const [data, setData] = useState([]);
     const [loadingModal, setLoadingModal] = useState(false);
-
+    const [listSudahJanji, setListSudahJanji] = useState('');
 
     const BUATJANJI = () => {
         setLoadingModal(true);
         const refDokter = firebase.firestore().collection('nama_dokter').doc(modalData.ID);
         const refPasien = firebase.firestore().collection('data_pasien').doc(firebase.auth().currentUser.uid);
+
         refDokter.get().then(snap => {
             const sample = snap.data().semua_pasien;
             if (sample.length !== 30) {
@@ -107,7 +132,9 @@ const JadwalDokterUser = ({ auth }) => {
                     })
                     .then(() => {
                         setLoadingModal(false);
+                        setVisibleModal(false);
                         message.success('Janji konsultasi telah dibuat');
+                        getJadwal();
                     })
                     .catch(err => {
                         message.error(err.message);
@@ -119,6 +146,29 @@ const JadwalDokterUser = ({ auth }) => {
             }
         })
 
+    }
+
+    const batalJanji = (index) => {
+        setLoading(true);
+        const ForDel = firebase.firestore().collection('nama_dokter').doc(listSudahJanji);
+        ForDel.get().then(snaps => {
+            const sample = snaps.data().semua_pasien;
+            sample.forEach(ini => {
+                if (ini === firebase.auth().currentUser.displayName) {
+                    sample.splice(index, 1);
+                    ForDel.set({ semua_pasien: sample }, { merge: true })
+                        .then(() => {
+                            firebase.firestore().collection('data_pasien').doc(firebase.auth().currentUser.uid)
+                                .set({
+                                    jadwalKonsultasi: {
+                                        DokterID: '', Poli: '', namaDokter: ''
+                                    }
+                                }, { merge: true })
+                                .then(() => getJadwal())
+                        })
+                }
+            })
+        })
     }
     return (
         <div className='pala' style={{ paddingTop: 150, minHeight: '100vh' }}>
