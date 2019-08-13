@@ -4,6 +4,7 @@ import { Icon, Menu, Dropdown, Modal, Button } from 'antd';
 import { NavLink } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import logo from '../../assets/logo.JPEG';
 
 const Navbar = ({ auth }) => {
     useEffect(() => {
@@ -60,7 +61,7 @@ const Navbar = ({ auth }) => {
                 overflow: 'hidden'
             }}>
                 <p style={{ margin: '0 50px' }}><Icon type='phone' style={{ marginRight: 5 }} />(0251) 8627277</p>
-                <p style={{ margin: 0 }}><Icon type="mail" style={{ marginRight: 5 }} /> dnsfds@gmail.com</p>
+                <p style={{ margin: 0 }}><Icon type="mail" style={{ marginRight: 5 }} /> klinikmuhammadiyahbogor@gmail.com</p>
             </div>
 
             <div className='bottomNavbar' style={{
@@ -71,7 +72,7 @@ const Navbar = ({ auth }) => {
                 boxShadow: scrollPos > 50 ? '0px 2px 10px rgba(0,0,0,.4)' : 'none',
                 justifyContent: 'space-between'
             }}>
-                <h1 className='klinikMuhammadiyah' style={{ margin: '0 0 0 50px' }}>KLINIK MUHAMMADIYAH BOGOR</h1>
+                <img src={logo} style={{width: 285}} alt=""/>
 
                 <ul className='navItems' style={{
                     display: 'flex',

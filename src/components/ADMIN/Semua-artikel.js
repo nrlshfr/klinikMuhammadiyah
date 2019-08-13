@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {Link} from 'react-router-dom';
 
 const { Meta } = Card;
 
@@ -63,9 +64,9 @@ const SemuaArtikel = () => {
                                     />
                                 }
                                 actions={[
-                                    <a href={`/admin-page/info-kesehatan/detail/${item.id}`} target='_blank' rel="noopener noreferrer">
+                                    <Link to={`/admin-page/info-kesehatan/detail/${item.id}`}>
                                         <Icon type="eye" />
-                                    </a>
+                                    </Link>
                                     ,
                                     <Popconfirm title='Hapus artikel ini ?' placement='bottom'
                                         onConfirm={() => {

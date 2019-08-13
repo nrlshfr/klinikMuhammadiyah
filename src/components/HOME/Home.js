@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './Home.modules.scss';
 import { Row, Col, Icon } from 'antd';
-import bg from '../../assets/home1.jpg';
+import bg from '../../assets/home1.JPG';
 import home2 from '../../assets/home2.JPG';
-import home3 from '../../assets/home3.jpg';
+import home3 from '../../assets/home3.JPEG';
+import home4 from '../../assets/home4.JPEG';
 
 const Home = () => {
     useEffect(() => {
@@ -16,49 +17,51 @@ const Home = () => {
 
     const services = [
         {
-            title: 'Layanan Darurat',
-            body: 'Menyediakan ambulan sebagai layanan darurat',
+            title: 'Ambulance',
+            body: 'Dapat dipanggil ketika keadaan terdesak dan darurat',
             icon: 'car'
         },
         {
-            title: 'Dokter Berpengalaman',
-            body: 'Diisi oleh dokter yang telah ahli dalam bidangnya',
+            title: 'IGD',
+            body: 'Memberikan pelayanan gawat darurat yang cepat, tepat, tanggap',
             icon: 'medicine-box'
-        },
-        {
-            title: 'Tindakan Pelayanan',
-            body: 'Terpercaya dengan harga terjangkau',
-            icon: 'experiment'
         },
         {
             title: 'Jam Buka',
             body: 'Senin - Minggu 08.00-21.00 WIB',
             icon: 'dashboard'
+        },
+        {
+            title: 'Laboratorium',
+            body: 'Terpercaya dengan harga terjangkau',
+            icon: 'experiment'
         }
     ]
 
-    // const specialist = [
-    //     {
-    //         title: 'NEUROLOGY',
-    //         body: 'Far far away, behind the word mountains',
-    //         icon: 'branches'
-    //     },
-    //     {
-    //         title: 'NEUROLOGY',
-    //         body: 'Far far away, behind the word mountains',
-    //         icon: 'branches'
-    //     },
-    //     {
-    //         title: 'NEUROLOGY',
-    //         body: 'Far far away, behind the word mountains',
-    //         icon: 'branches'
-    //     },
-    //     {
-    //         title: 'NEUROLOGY',
-    //         body: 'Far far away, behind the word mountains',
-    //         icon: 'branches'
-    //     }
-    // ]
+
+    const specialist = [
+    {
+             title: 'NEUROLOGY',
+             body: 'Far far away, behind the word mountains',
+             icon: 'branches'
+         },
+         {
+             title: 'NEUROLOGY',
+             body: 'Far far away, behind the word mountains',
+             icon: 'branches'
+         },
+         {
+             title: 'NEUROLOGY',
+             body: 'Far far away, behind the word mountains',
+             icon: 'branches'
+         },
+         {
+             title: 'NEUROLOGY',
+             body: 'Far far away, behind the word mountains',
+             icon: 'branches'
+         }
+     ]
+     
     return (
         <div style={{
             width: '100%',
@@ -74,12 +77,12 @@ const Home = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                <h1 style={{ color: '#fff', fontSize: '5vw' }}><span style={{ fontWeight: 'bolder' }}>KLINIK</span> MUHAMMADIYAH</h1>
             </div>
 
             <div style={{
                 width: '100%',
             }}>
+
                 <Row className='section2' style={{ minHeight: '100vh' }}>
                     <Col sm={24} md={12}>
                         <div className='frameHome2' style={{
@@ -111,9 +114,10 @@ const Home = () => {
                 </Row>
 
                 <Row className='section3'>
+                }}>
                     <div className='framePoliLayanan' style={{
-                        width: '100%', height: 500, backgroundImage: `url(${home3})`,
-                        backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed',
+                       minHeight: '50vh', backgroundImage: `url(${home3})`
+                       , backgroundSize: 'cover', backgroundRepeat: 'no-repeat',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center', justifyContent: 'center', color: '#fff'
@@ -149,6 +153,35 @@ const Home = () => {
                     </div>
                 </Row>
 
+                <Row className='section3' style={{ minHeight: '100vh' }}>
+                    <Col sm={24} md={12}>
+                        <div className='frameHome2' style={{
+                            display: 'flex',
+                            width: '100%',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            minHeight: '100vh',
+                        }}>
+                            <img src={home2} alt="" style={{ width: 400 }} />
+                        </div>
+                    </Col>
+
+                    <Col sm={24} md={12}>
+                        <div className='mengapa' style={{
+                            display: 'flex',
+                            width: '100%',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            minHeight: '100vh',
+                            flexDirection: 'column'
+                        }}>
+                            <h1 style={{ fontSize: 44, width: "80%" }}>MENGAPA HARUS MEMILIH KAMI?</h1>
+                            <p style={{ width: '80%' }}>
+                                Kami adalah klinik kesehatan umum terbaik di Bubulak, Bogor. Buka setiap hari untuk memberikan pelayanan kesehatan secara jujur, adil, dan profesional.
+                            </p>
+                        </div>
+                    </Col>
+                </Row>
                 {/* <Row style={{ display: 'flex', alignItems: 'center', maxHeight: '30vh', flexWrap: 'wrap' }}>
                     <div style={{ width: '100%' }}>
                         {specialist.map((item, index) => (
@@ -177,7 +210,7 @@ const Home = () => {
 
 
                 <Row className='fakta' style={{
-                    minHeight: '70vh', backgroundImage: `url(${bg})`
+                    minHeight: '70vh', backgroundImage: `url(${home4})`
                     , backgroundSize: 'cover', backgroundRepeat: 'no-repeat',
                 }}>
                     <div className='fakta2' style={{ background: '#207dffb8', minHeight: '70vh' }}>

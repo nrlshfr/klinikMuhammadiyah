@@ -27,8 +27,8 @@ const InfoKesehatan = () => {
     const [loading, setLoading] = useState(true);
 
     return (
-        <div className='pala' style={{ paddingTop: 150, display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh' }}>
-            <h1>Info Kesehatan</h1>
+        <div className='pala' style={{paddingTop: 150, display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh' }}>
+            <h1 style={{marginTop:25}}>Info Kesehatan</h1>
             {loading ?
                 <Card loading style={{ width: '80%' }} />
                 :

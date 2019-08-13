@@ -67,6 +67,11 @@ const JadwalDokter = () => {
             ),
         },
         {
+            title: 'Harga',
+            dataIndex: 'Harga',
+            key: 'Harga',
+        },
+        {
             title: 'Nama Pasien',
             dataIndex: 'semua_pasien',
             key: 'semua_pasien',

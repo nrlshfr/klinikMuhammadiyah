@@ -1,5 +1,4 @@
 import React from 'react';
-import bg from '../../assets/footer-bg.jpg';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
 import './Footer.modules.scss';
@@ -8,7 +7,7 @@ const Footer = () => {
     return (
         <div style={{
             width: '100%',
-            backgroundImage: `url(${bg})`,
+            backgroundColor:'#438d6',
             backgroundSize: 'cover',
             position: 'relative',
             minHeight: 400,

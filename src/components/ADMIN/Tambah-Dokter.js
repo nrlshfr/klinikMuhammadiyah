@@ -23,6 +23,7 @@ const TambahDokter = () => {
     const [NoHP, setNoHP] = useState();
     const [Jadwal, setJadwal] = useState([]);
     const [InputJadwal, setInputJadwal] = useState('');
+    const [Harga, setHarga] = useState('');
 
     const formField = [
         {
@@ -50,6 +51,11 @@ const TambahDokter = () => {
             value: NoHP,
             onChange: setNoHP
         },
+        {
+            placeholder: 'Harga',
+            value: Harga,
+            onChange: setHarga
+        },
     ]
 
     const resetField = () => {
@@ -61,7 +67,7 @@ const TambahDokter = () => {
     }
 
     const addDokterEvent = () => {
-        if (ID === '' || Nama === '' || Poli === '' || Alamat === '' || NoHP === '' || Jadwal === '') {
+        if (ID === '' || Nama === '' || Poli === '' || Alamat === '' || NoHP === '' || Jadwal === '' || Harga === '') {
             message.warning('Semua kolom harus diisi !');
         } else {
             setLoading(true);
@@ -75,7 +81,8 @@ const TambahDokter = () => {
                 NoHP: NoHP,
                 Jadwal: Jadwal,
                 semua_pasien: [],
-                key: ID
+                key: ID,
+                Harga: Harga
             })
                 .then(() => {
                     message.success('Dokter Ditambahkan');

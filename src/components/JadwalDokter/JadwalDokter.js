@@ -76,6 +76,11 @@ const JadwalDokterUser = ({ auth }) => {
             ),
         },
         {
+            title: 'Harga',
+            dataIndex: 'Harga',
+            key: 'Harga',
+        },
+        {
             title: 'Buat Janji',
             dataIndex: 'buatJanji',
             key: 'buatJanji',
