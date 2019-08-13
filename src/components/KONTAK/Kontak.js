@@ -15,7 +15,7 @@ const Kontak = () => {
         {
             icon: 'home',
             title: 'address',
-            body: '198 West 21th Street, Suite 721 New York NY 10016',
+            body: '198 West 21th Street, Suite 721 New York NY 10016 198 West 21th Street, Suite 721 New York NY 10016',
         },
         {
             icon: 'home',
@@ -78,7 +78,9 @@ const Kontak = () => {
                             alignItems: 'center',
                             flexDirection: 'column',
                             background: '#f8f9fa',
-                            padding: 20
+                            padding: 20,
+                            width: '100%',
+                            minHeight: 250
                         }}>
                             <Icon type={item.icon} style={{ fontSize: '2rem', background: '#fff', padding: 20, color: '#217dfe', borderRadius: '50%' }} />
                             <h2>{item.title}</h2>
