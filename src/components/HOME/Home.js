@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './Home.modules.scss';
-import { Row, Col, Icon } from 'antd';
-import bg from '../../assets/home1.JPG';
+import { Row, Col, Icon, Card, message, Divider } from 'antd';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Link } from 'react-router-dom';
+
+import bg from '../../assets/home1.jpg';
 import home2 from '../../assets/home2.JPG';
 import home3 from '../../assets/home3.JPEG';
 import home4 from '../../assets/home4.JPEG';
@@ -11,9 +17,12 @@ const Home = () => {
         window.addEventListener('scroll', () => {
             setScrollpos(window.scrollY);
         })
+
+        getInfoKesehatan();
     }, [])
 
     const [scrollPos, setScrollpos] = useState(0);
+    const [infoKesehatan, setInfoKesehatan] = useState([]);
 
     const services = [
         {
@@ -38,30 +47,16 @@ const Home = () => {
         }
     ]
 
+    const getInfoKesehatan = () => {
+        const data = [];
+        firebase.firestore().collection('semua_artikel').limit(3).get()
+            .then(snap => snap.forEach(child => data.push(child.data())))
+            .then(() => {
+                setInfoKesehatan(data);
+            })
+            .catch(err => message.error(err.message))
+    }
 
-    const specialist = [
-    {
-             title: 'NEUROLOGY',
-             body: 'Far far away, behind the word mountains',
-             icon: 'branches'
-         },
-         {
-             title: 'NEUROLOGY',
-             body: 'Far far away, behind the word mountains',
-             icon: 'branches'
-         },
-         {
-             title: 'NEUROLOGY',
-             body: 'Far far away, behind the word mountains',
-             icon: 'branches'
-         },
-         {
-             title: 'NEUROLOGY',
-             body: 'Far far away, behind the word mountains',
-             icon: 'branches'
-         }
-     ]
-     
     return (
         <div style={{
             width: '100%',
@@ -114,16 +109,21 @@ const Home = () => {
                 </Row>
 
                 <Row className='section3'>
-                }}>
                     <div className='framePoliLayanan' style={{
-                       minHeight: '50vh', backgroundImage: `url(${home3})`
-                       , backgroundSize: 'cover', backgroundRepeat: 'no-repeat',
+                        minHeight: '50vh', backgroundImage: `url(${home3})`
+                        , backgroundSize: '100%', backgroundRepeat: 'no-repeat',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center', justifyContent: 'center', color: '#fff'
                     }}>
                         <h1 style={{ color: '#fff', fontSize: 44 }}>Poli dan Layanan</h1>
                         <p style={{ fontSize: 35 }}>Kesehatan Anda Prioritas Kami</p>
+                    </div>
+                </Row>
+
+                <Row>
+                    <div>
+                        <h1 style={{ fontSize: 44 }}>Info Layanan</h1>
                     </div>
                 </Row>
 
@@ -134,16 +134,17 @@ const Home = () => {
                                 display: 'flex',
                                 padding: '10px 10px',
                                 justifyContent: 'space-between',
-                                alignItems: 'flex-start',
+                                alignItems: 'center',
+                                flexDirection: 'column',
                                 maxWidth: 300
                             }}>
 
                                 <Icon type={item.icon} style={{
-                                    fontSize: '1.5em', backgroundColor: '#ffeeed', color: '#fe5f55',
+                                    fontSize: '3em', backgroundColor: '#ffeeed', color: '#fe5f55',
                                     padding: 15, borderRadius: '50%'
                                 }} />
                                 <div>
-                                    <h3 style={{ textAlign: 'center', fontSize: 20 }}>{item.title}</h3>
+                                    <h3 style={{ textAlign: 'center', fontSize: 20, margin: '10px 0 0 0 ' }}>{item.title}</h3>
                                     <p style={{ textAlign: 'center' }}>
                                         {item.body}
                                     </p>
@@ -152,62 +153,6 @@ const Home = () => {
                         ))}
                     </div>
                 </Row>
-
-                <Row className='section3' style={{ minHeight: '100vh' }}>
-                    <Col sm={24} md={12}>
-                        <div className='frameHome2' style={{
-                            display: 'flex',
-                            width: '100%',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            minHeight: '100vh',
-                        }}>
-                            <img src={home2} alt="" style={{ width: 400 }} />
-                        </div>
-                    </Col>
-
-                    <Col sm={24} md={12}>
-                        <div className='mengapa' style={{
-                            display: 'flex',
-                            width: '100%',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            minHeight: '100vh',
-                            flexDirection: 'column'
-                        }}>
-                            <h1 style={{ fontSize: 44, width: "80%" }}>MENGAPA HARUS MEMILIH KAMI?</h1>
-                            <p style={{ width: '80%' }}>
-                                Kami adalah klinik kesehatan umum terbaik di Bubulak, Bogor. Buka setiap hari untuk memberikan pelayanan kesehatan secara jujur, adil, dan profesional.
-                            </p>
-                        </div>
-                    </Col>
-                </Row>
-                {/* <Row style={{ display: 'flex', alignItems: 'center', maxHeight: '30vh', flexWrap: 'wrap' }}>
-                    <div style={{ width: '100%' }}>
-                        {specialist.map((item, index) => (
-                            <Col sm={6} key={index} style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                borderLeft: index !== 0 ? '.5px solid #333' : 'none',
-                                borderBottom: '.5px solid #333',
-                                borderTop: '.5px solid #333',
-                                padding: '10px 10px',
-                                height: 200,
-                                justifyContent: 'center'
-                            }}>
-                                <Icon type={item.icon} style={{ fontSize: 40, color: '#207dff', marginBottom: 10 }} />
-
-                                <h3 style={{ textAlign: 'center', fontSize: 20 }}>{item.title}</h3>
-                                <p style={{ textAlign: 'center' }}>
-                                    {item.body}
-                                </p>
-
-                            </Col>
-                        ))}
-                    </div>
-                </Row> */}
-
 
                 <Row className='fakta' style={{
                     minHeight: '70vh', backgroundImage: `url(${home4})`
@@ -248,7 +193,46 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
+                </Row>
 
+                <Row style={{ padding: '40px 0 40px 0', }}>
+                    <h1 style={{ textAlign: 'center', }}>Info Kesehatan</h1>
+                    <Divider />
+
+                    <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-around'
+                    }}>
+                        {infoKesehatan.map((item, index) => (
+                            <Card
+                                key={index}
+                                style={{ width: 300, marginBottom: 20 }}
+                                cover={
+                                    <img
+                                        alt={item.Judul}
+                                        src={item.headerIMG}
+                                        style={{ width: '100%', height: 200 }}
+                                    />
+                                }
+                            >
+                                <Card.Meta
+                                    title={<Link to={`/info-kesehatan/detail/${item.id}`} onClick={() => window.scrollTo(0, 0)}>
+                                        {item.Judul}</Link>}
+                                    description={
+                                        <CKEditor
+                                            editor={ClassicEditor}
+                                            data={item.Body.slice(0, 100) + '...'}
+                                            disabled={true}
+                                            config={{
+                                                toolbar: [''],
+                                            }}
+                                        />
+                                    }
+                                />
+                            </Card>
+                        ))}
+                    </div>
                 </Row>
 
             </div>

@@ -57,7 +57,7 @@ const JadwalDokter = () => {
             dataIndex: 'Jadwal',
             key: 'Jadwal',
             render: tags => (
-                <div style={{ width: 200 }}>
+                <div style={{ width: 150 }}>
                     {tags.map((tag, index) => {
                         return (
                             <p key={index}>{tag.toUpperCase()}</p>
@@ -70,6 +70,9 @@ const JadwalDokter = () => {
             title: 'Harga',
             dataIndex: 'Harga',
             key: 'Harga',
+            render: (item) => (
+                <p style={{ width: 100 }}>Rp {item}</p>
+            )
         },
         {
             title: 'Nama Pasien',
@@ -112,7 +115,7 @@ const JadwalDokter = () => {
             <h1 style={{ fontSize: '2rem' }}>Jadwal Dokter</h1>
             <Table columns={columns} dataSource={data} loading={loading} bordered pagination={false} />
         </div>
-        );
-    }
-    
+    );
+}
+
 export default JadwalDokter;

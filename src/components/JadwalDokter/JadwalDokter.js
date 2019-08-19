@@ -49,7 +49,6 @@ const JadwalDokterUser = ({ auth }) => {
 
     }
 
-
     const columns = [
         {
             title: 'Nama',
@@ -66,7 +65,7 @@ const JadwalDokterUser = ({ auth }) => {
             dataIndex: 'Jadwal',
             key: 'Jadwal',
             render: tags => (
-                <div >
+                <div>
                     {tags.map((tag, index) => {
                         return (
                             <p className='isiJadwal' key={index}>{tag.toUpperCase()}</p>
@@ -79,34 +78,44 @@ const JadwalDokterUser = ({ auth }) => {
             title: 'Harga',
             dataIndex: 'Harga',
             key: 'Harga',
+            render: hrg => (
+                <p>Rp {hrg} /Konsultasi</p>
+            )
         },
         {
-            title: 'Buat Janji',
-            dataIndex: 'buatJanji',
-            key: 'buatJanji',
+            title: 'Daftar',
+            dataIndex: 'daftar',
+            key: 'daftar',
 
             render: (text, index) => (
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                    {listSudahJanji !== '' ? index.ID === listSudahJanji ?
-                        <Popconfirm title='Batalkan janji dengan dokter ini?' onConfirm={() => batalJanji(index)}>
-                            <Button
-                                style={{ margin: '0 auto' }} type='danger'>Batalkan Janji</Button>
-                        </Popconfirm>
-                        :
-                        <Button
-                            onClick={() => message.warn('Anda telah membuat janji dengan dokter lain, jika ingin membuat janji dengan dokter ini silahkan batalkan janji dengan dokter sebelumnya')}
-                            style={{ margin: '0 auto' }} type='ghost'>Buat Janji</Button>
-                        :
-                        <Button
-                            onClick={auth ? () => {
-                                setVisibleModal(true);
-                                setModalData({
-                                    ID: index.ID,
-                                    Nama: index.Nama,
-                                    Poli: index.Poli
-                                })
-                            } : () => window.location.pathname = '/masuk'}
-                            style={{ margin: '0 auto' }} type='primary'>Buat Janji</Button>}
+                    {auth ?
+                        index.indexJadwal.map(item => {
+                            if (item !== new Date().getDay()) {
+
+                            } else {
+                                return listSudahJanji !== '' ? index.ID === listSudahJanji ?
+                                    <Popconfirm title='Batalkan pendaftaran dengan dokter ini?' onConfirm={() => batalJanji(index)}>
+                                        <Button
+                                            style={{ margin: '0 auto' }} type='danger'>Batalkan Pendaftaran</Button>
+                                    </Popconfirm>
+                                    :
+                                    <Button
+                                        onClick={() => message.warn('Anda telah daftar dengan dokter lain, jika ingin mendaftar dengan dokter ini silahkan batalkan pendaftaran dengan dokter sebelumnya')}
+                                        style={{ margin: '0 auto' }} type='ghost'>Daftar</Button>
+                                    :
+                                    <Button
+                                        onClick={() => {
+                                            setVisibleModal(true);
+                                            setModalData({
+                                                ID: index.ID,
+                                                Nama: index.Nama,
+                                                Poli: index.Poli
+                                            })
+                                        }}
+                                        style={{ margin: '0 auto' }} type='primary'>Daftar</Button>
+                            }
+                        }) : <Button onClick={() => window.location.pathname = '/masuk'}>Masuk untuk daftar</Button>}
                 </div>
             ),
         }
@@ -138,7 +147,7 @@ const JadwalDokterUser = ({ auth }) => {
                     .then(() => {
                         setLoadingModal(false);
                         setVisibleModal(false);
-                        message.success('Janji konsultasi telah dibuat');
+                        message.success('Daftar konsultasi telah dibuat');
                         getJadwal();
                     })
                     .catch(err => {
@@ -146,7 +155,7 @@ const JadwalDokterUser = ({ auth }) => {
                         setLoadingModal(false);
                     })
             } else {
-                message.warning('Kuota janji temu dokter ini sudah penuh');
+                message.warning('Kuota daftar temu dokter ini sudah penuh');
                 setLoadingModal(false);
             }
         })
@@ -182,6 +191,10 @@ const JadwalDokterUser = ({ auth }) => {
                 display: 'flex', flexDirection: 'column', alignItems: 'center'
             }}>
                 <h1 style={{ fontSize: '2rem' }}>Jadwal Dokter</h1>
+
+                <p style={{
+                    fontSize: 10
+                }}>*Pendaftaran hanya bisa dilakukan pada hari yang bersangkutan</p>
                 <Table className='jadwalDokter'
                     scroll={{ x: 10 }}
                     style={{ width: '70%' }}
@@ -189,7 +202,7 @@ const JadwalDokterUser = ({ auth }) => {
             </div>
 
             <Modal
-                title="Buat Janji"
+                title="Daftar"
                 visible={visibleModal}
                 closable={false}
                 footer={[
@@ -197,7 +210,7 @@ const JadwalDokterUser = ({ auth }) => {
                         Kembali
             </Button>,
                     <Button onClick={BUATJANJI} key="submit" type="primary" loading={loadingModal}>
-                        Buat Janji
+                        Daftar
             </Button>,
                 ]}
             >

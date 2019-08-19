@@ -7,14 +7,15 @@ const Footer = () => {
     return (
         <div style={{
             width: '100%',
-            backgroundColor:'#438d6',
+            backgroundColor: '#2c466b',
             backgroundSize: 'cover',
             position: 'relative',
             minHeight: 400,
-            backgroundRepeat: 'no-repeat'
+            backgroundRepeat: 'no-repeat',
+            color: '#fff'
         }}>
             <div style={{
-                width: '100%', position: 'absolute', bottom: 0, background: '#f1f1f1c7', zIndex: 10, height: 400,
+                width: '100%', position: 'absolute', bottom: 0, background: '#438d6', zIndex: 10, height: 400,
                 display: 'flex', alignItems: 'center', flexDirection: 'column'
             }}>
                 <div className='footerContent' style={{
@@ -22,7 +23,7 @@ const Footer = () => {
                     flexWrap: 'wrap'
                 }}>
                     <div className='slogan'>
-                        <h3>KLINIK MUHAMMADIYAH</h3>
+                        <h3 style={{ color: '#fff' }}>KLINIK MUHAMMADIYAH</h3>
                         <p style={{ width: 150 }}>
                             Far far away, behind the word mountains, far from the countries.
                         </p>
@@ -30,12 +31,12 @@ const Footer = () => {
 
                     <div style={{ display: 'flex' }}>
                         <div style={{ marginRight: 50 }}>
-                            <h3>Informasi Kontak</h3>
+                            <h3 style={{ color: '#fff' }}>Informasi Kontak</h3>
                             <ul>
                                 <li><Icon type='mail' /> Info@gmail.com</li>
                                 <li><Icon type='phone' /> 0251 - 8635592</li>
                                 <li style={{ marginTop: 20 }}>
-                                    <h4><Icon type='environment' /> Klinik Muhammadiyah Bogor</h4>
+                                    <h4 style={{ color: '#fff' }}><Icon type='environment' /> Klinik Muhammadiyah Bogor</h4>
                                     <p>Jl. Bubulak Bogor</p>
                                 </li>
 
@@ -44,19 +45,19 @@ const Footer = () => {
                         </div>
 
                         <div>
-                            <h3>LINKS</h3>
+                            <h3 style={{ color: '#fff' }}>LINKS</h3>
                             <ul>
                                 <li>
-                                    <Link to='/'>Beranda</Link>
+                                    <Link onClick={() => window.scrollTo(0, 0)} style={{ color: '#fff' }} to='/'>Beranda</Link>
                                 </li>
                                 <li>
-                                    <Link to='/jadwal-dokter'>Dokter</Link>
+                                    <Link onClick={() => window.scrollTo(0, 0)} style={{ color: '#fff' }} to='/jadwal-dokter'>Dokter</Link>
                                 </li>
                                 <li>
-                                    <Link to='/info-kesehatan'>Info Kesehatan</Link>
+                                    <Link onClick={() => window.scrollTo(0, 0)} style={{ color: '#fff' }} to='/info-kesehatan'>Info Kesehatan</Link>
                                 </li>
                                 <li>
-                                    <Link to='/kontak'>Kontak</Link>
+                                    <Link onClick={() => window.scrollTo(0, 0)} style={{ color: '#fff' }} to='/kontak'>Kontak</Link>
                                 </li>
                             </ul>
                         </div>

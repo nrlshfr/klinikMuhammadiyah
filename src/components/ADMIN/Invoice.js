@@ -24,6 +24,20 @@ const Invoice = () => {
         {
             title: 'Harga',
             dataIndex: 'Harga',
+            render: (text) => (
+                <span>Rp {text}</span>
+            )
+        },
+        {
+            title: 'Kuantitas',
+            dataIndex: 'Kuantitas',
+        },
+        {
+            title: 'Total Harga',
+            dataIndex: 'TotalHarga',
+            render: (text) => (
+                <span>Rp {text}</span>
+            )
         },
     ];
 
@@ -74,7 +88,7 @@ const Invoice = () => {
                             <div style={{
                                 width: '37%'
                             }}>
-                                <p style={{ fontWeight: 'bold' }}>Total harga : {invoiceData.totalHarga}</p>
+                                <p style={{ fontWeight: 'bold' }}>Total harga : Rp {invoiceData.totalHarga}</p>
                             </div>
                         </div>
                     </div>

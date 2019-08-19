@@ -3,7 +3,7 @@ import {
     Form,
     Input,
     Button,
-    message, Tag
+    message, Tag, Select
 } from 'antd';
 
 import firebase from 'firebase/app';
@@ -22,6 +22,8 @@ const TambahDokter = () => {
     const [Alamat, setAlamat] = useState('');
     const [NoHP, setNoHP] = useState();
     const [Jadwal, setJadwal] = useState([]);
+    const [indexJadwal, setIndexJadwal] = useState([]);
+    const [hari, setHari] = useState('Senin');
     const [InputJadwal, setInputJadwal] = useState('');
     const [Harga, setHarga] = useState('');
 
@@ -64,6 +66,7 @@ const TambahDokter = () => {
         })
         setInputJadwal('');
         setJadwal([]);
+        setHari('Senin');
     }
 
     const addDokterEvent = () => {
@@ -82,7 +85,8 @@ const TambahDokter = () => {
                 Jadwal: Jadwal,
                 semua_pasien: [],
                 key: ID,
-                Harga: Harga
+                Harga: Harga,
+                indexJadwal: indexJadwal
             })
                 .then(() => {
                     message.success('Dokter Ditambahkan');
@@ -112,27 +116,52 @@ const TambahDokter = () => {
                         )
                     } else return null;
                 })}
-                <h5>Jadwal</h5>
-                {Jadwal.map((item, index) => (
-                    <Tag key={index} closable>{item}</Tag>
-                ))}
-                <Input placeholder='Isi Jadwal' style={{ width: 150 }}
-                    onChange={e => setInputJadwal(e.target.value)}
-                    value={InputJadwal}
-                    onKeyPress={e => {
-                        if (e.key === 'Enter') {
-                            if (InputJadwal === '') {
+                <label>Jadwal</label>
+                <div style={{ display: 'flex', marginBottom: 20 }}>
+                    {Jadwal.map((item, index) => (
+                        <Tag style={{ padding: '10px 30px', marginRight: 10 }}>{item}</Tag>
+                    ))}
+                </div>
 
-                            } else {
-                                setJadwal(prev => {
-                                    let old = [...prev];
-                                    old.push(InputJadwal)
-                                    return old;
-                                })
-                                setInputJadwal('');
+                <div style={{ display: 'flex' }}>
+                    <Select value={hari} onChange={e => setHari(e)} style={{ width: '30%', marginRight: 20 }}>
+                        <Select.Option value='Senin'>Senin</Select.Option>
+                        <Select.Option value='Selasa'>Selasa</Select.Option>
+                        <Select.Option value='Rabu'>Rabu</Select.Option>
+                        <Select.Option value='Kamis'>Kamis</Select.Option>
+                        <Select.Option value='Jumat'>Jumat</Select.Option>
+                        <Select.Option value='Sabtu'>Sabtu</Select.Option>
+                    </Select>
+
+                    <Input placeholder='Isi Jadwal' style={{ width: '70%' }}
+                        onChange={e => setInputJadwal(e.target.value)}
+                        value={InputJadwal}
+                        onKeyPress={e => {
+                            if (e.key === 'Enter') {
+                                if (InputJadwal === '') {
+
+                                } else {
+                                    setJadwal(prev => {
+                                        let old = [...prev];
+                                        old.push(`${hari}, ${InputJadwal}`)
+                                        return old;
+                                    })
+                                    setIndexJadwal(prev => {
+                                        const semuaHari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                                        let old = [...prev];
+                                        semuaHari.forEach((item, index) => {
+                                            if (item === hari) {
+                                                return old.push(index + 1);
+                                            }
+                                        })
+                                        return old;
+                                    })
+                                    setInputJadwal('');
+                                    setHari('Senin');
+                                }
                             }
-                        }
-                    }} />
+                        }} />
+                </div>
 
                 <div style={{
                     marginTop: 20

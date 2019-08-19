@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Table, Button, InputNumber, message } from 'antd';
+import { Form, Input, Table, Button, InputNumber, message, Tag } from 'antd';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
@@ -12,6 +12,20 @@ const BuatInvoice = () => {
         {
             title: 'Harga',
             dataIndex: 'Harga',
+            render: (text) => (
+                <span>Rp {text}</span>
+            )
+        },
+        {
+            title: 'Kuantitas',
+            dataIndex: 'Kuantitas',
+        },
+        {
+            title: 'Total Harga',
+            dataIndex: 'TotalHarga',
+            render: (text) => (
+                <span>Rp {text}</span>
+            )
         },
         {
             title: '',
@@ -20,7 +34,7 @@ const BuatInvoice = () => {
                 <Button type='danger' onClick={() => {
                     const filters = data.filter(d => d.Deskripsi !== text.Deskripsi);
                     setData(filters);
-                    setTotalHarga(prev => prev - text.Harga)
+                    setTotalHarga(prev => prev - text.TotalHarga)
                 }}>Hapus</Button>
             ),
         },
@@ -30,25 +44,57 @@ const BuatInvoice = () => {
 
     ]);
 
-    const [deskripsi, setDeskripsi] = useState('');
-    const [harga, setHarga] = useState(0);
+    const [kode, setKode] = useState('');
+    const [kuantitas, setKuantitas] = useState(0);
     const [totalHarga, setTotalHarga] = useState(null);
 
     const submitDeskripsi = (e) => {
         e.preventDefault();
-        setData(prev => {
-            const sample = [...prev];
-            const newData = {
-                Deskripsi: deskripsi,
-                Harga: harga,
-                key: sample.length + 1
-            };
-            sample.push(newData);
-            return sample;
-        });
-        setTotalHarga(prev => prev + harga);
-        setDeskripsi('');
-        setHarga(null);
+        firebase.firestore().collection('daftar_harga').doc(kode).get()
+            .then(snap => {
+                if (snap.exists) {
+                    switch (snap.data().Kategori) {
+                        case 'Layanan':
+                            setData(prev => {
+                                const sample = [...prev];
+                                const newData = {
+                                    Deskripsi: snap.data().namaLayanan,
+                                    Harga: snap.data().hargaLayanan,
+                                    key: sample.length + 1,
+                                    Kuantitas: kuantitas,
+                                    TotalHarga: snap.data().hargaLayanan * kuantitas
+                                };
+                                sample.push(newData);
+                                return sample;
+                            });
+                            setTotalHarga(prev => prev + snap.data().hargaLayanan * kuantitas);
+                            break;
+
+                        case 'Obat':
+                            setData(prev => {
+                                const sample = [...prev];
+                                const newData = {
+                                    Deskripsi: snap.data().namaObat,
+                                    Harga: snap.data().hargaObat,
+                                    key: sample.length + 1,
+                                    Kuantitas: kuantitas,
+                                    TotalHarga: snap.data().hargaObat * kuantitas
+                                };
+                                sample.push(newData);
+                                return sample;
+                            });
+                            setTotalHarga(prev => prev + snap.data().hargaObat * kuantitas);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    setKode('');
+                    setKuantitas(null);
+                } else {
+                    message.warning('Kode yang anda masukkan tidak ditemukan di database');
+                }
+            })
     }
 
     const [nomorInvoice, setNomorInvoice] = useState('');
@@ -87,8 +133,7 @@ const BuatInvoice = () => {
             .then((snap) => {
                 ref.doc(snap.id).set({ id: snap.id }, { merge: true })
                     .then(() => {
-                        setDeskripsi('');
-                        setHarga(null);
+                        setTotalHarga(null);
                         setNomorInvoice('');
                         setNomorRef('');
                         setNamaPasien('');
@@ -98,6 +143,7 @@ const BuatInvoice = () => {
                         setKodePos('');
                         message.success('INVOICE TERKIRIM');
                         setLoading(false);
+                        setData([]);
                     })
             })
             .catch(err => {
@@ -155,15 +201,15 @@ const BuatInvoice = () => {
                     marginTop: 20
                 }}>
                     <Form.Item style={{ marginRight: 20 }}>
-                        <Input placeholder='Deskripsi' value={deskripsi} onChange={e => (setDeskripsi(e.target.value))} />
+                        <Input placeholder='Kode' value={kode} onChange={e => (setKode(e.target.value))} />
                     </Form.Item>
 
                     <Form.Item style={{ marginRight: 20 }}>
-                        <InputNumber placeholder='Harga' value={harga} type='number' onChange={e => setHarga(e)} />
+                        <InputNumber value={kuantitas} type='number' onChange={e => setKuantitas(e)} placeholder='Kuantitas' />
                     </Form.Item>
 
                     <Form.Item>
-                        <Button disabled={deskripsi === '' || harga === '' ? true : false} type='primary' onClick={submitDeskripsi}>Masukkan</Button>
+                        <Button disabled={kode === '' || kuantitas === '' ? true : false} type='primary' onClick={submitDeskripsi}>Masukkan</Button>
                     </Form.Item>
                 </div>
             </Form>

@@ -56,7 +56,7 @@ const Navbar = ({ auth }) => {
                 display: 'flex',
                 color: '#fff',
                 alignItems: 'center',
-                background: '#207dff',
+                background: '#2c466b',
                 height: scrollPos > 50 ? 0 : 30,
                 overflow: 'hidden'
             }}>
@@ -72,7 +72,7 @@ const Navbar = ({ auth }) => {
                 boxShadow: scrollPos > 50 ? '0px 2px 10px rgba(0,0,0,.4)' : 'none',
                 justifyContent: 'space-between'
             }}>
-                <img src={logo} style={{width: 285}} alt=""/>
+                <img src={logo} style={{ width: 285 }} alt="" />
 
                 <ul className='navItems' style={{
                     display: 'flex',

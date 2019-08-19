@@ -7,12 +7,15 @@ import JadwalDokter from './jadwal-dokter';
 import TambahDokter from './Tambah-Dokter';
 import BuatArtikel from './Buat-Artikel';
 import SemuaArtikel from './Semua-artikel';
-import ArtikelDetail from '../ArtikelDetail/ArtikelDetail';
 import Pesan from './Pesan';
 import Invoice from './Invoice';
 import BuatInvoice from './BuatInvoice';
 import SemuaInvoice from './SemuaInvoice';
 import { Button } from 'antd/lib/radio';
+import InputData from './InputData';
+import Layanan from './Layanan';
+import Obat from './Obat';
+import AdminArtikelDetail from './AdminArtikelDetail';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer } = Layout;
@@ -118,6 +121,30 @@ const AdminPage = () => {
                             </SubMenu>
                             <SubMenu title={
                                 <span className="submenu-title-wrapper">
+                                    <Icon type="sliders" />
+                                    Daftar Harga
+                         </span>
+                            }>
+                                <Menu.ItemGroup >
+                                    <Menu.Item key="/admin-page/layanan">
+                                        <Link to='/admin-page/layanan'>
+                                            Layanan
+                            </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="/admin-page/obat">
+                                        <Link to='/admin-page/obat'>
+                                            Obat
+                                </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="/admin-page/input-data">
+                                        <Link to='/admin-page/input-data'>
+                                            Input Data
+                                </Link>
+                                    </Menu.Item>
+                                </Menu.ItemGroup>
+                            </SubMenu>
+                            <SubMenu title={
+                                <span className="submenu-title-wrapper">
                                     <Icon type="form" />
                                     Artikel
                          </span>
@@ -152,8 +179,11 @@ const AdminPage = () => {
                         <Route path='/admin-page/buat-invoice' render={() => <BuatInvoice />} />
                         <Route path='/admin-page/semua-invoice' render={() => <SemuaInvoice />} />
                         <Route path='/admin-page/semua-artikel' render={() => <SemuaArtikel />} />
-                        <Route path='/admin-page/info-kesehatan/detail/' render={() => <ArtikelDetail />} />
+                        <Route path='/admin-page/info-kesehatan/detail/' render={() => <AdminArtikelDetail />} />
                         <Route path='/admin-page/pesan' render={() => <Pesan />} />
+                        <Route path='/admin-page/layanan' render={() => <Layanan />} />
+                        <Route path='/admin-page/obat' render={() => <Obat />} />
+                        <Route path='/admin-page/input-data' render={() => <InputData />} />
 
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>Copyright {new Date().getFullYear()} | Nurul Shafira</Footer>

@@ -27,8 +27,8 @@ const InfoKesehatan = () => {
     const [loading, setLoading] = useState(true);
 
     return (
-        <div className='pala' style={{paddingTop: 150, display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh' }}>
-            <h1 style={{marginTop:25}}>Info Kesehatan</h1>
+        <div className='pala' style={{ paddingTop: 150, display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh' }}>
+            <h1 style={{ marginTop: 25 }}>Info Kesehatan</h1>
             {loading ?
                 <Card loading style={{ width: '80%' }} />
                 :
@@ -42,11 +42,11 @@ const InfoKesehatan = () => {
                         overflow: 'hidden',
                         marginBottom: 20,
                     }}>
-                        <div className='artikelImg' style={{ width: '40%', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
+                        <div className='artikelImg' style={{ width: '30%', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
                             <img src={item.headerIMG} alt="" style={{ width: '100%' }} />
                         </div>
-                        <div style={{ padding: '20px' }}>
-                            <Link to={`/admin-page/info-kesehatan/detail/${item.id}`}><h2 style={{ cursor: 'pointer' }}>{item.Judul.slice(0, 50)}</h2></Link>
+                        <div style={{ padding: '20px', width: '70%' }}>
+                            <Link to={`/info-kesehatan/detail/${item.id}`} style={{ fontSize: 24 }}>{item.Judul.slice(0, 50)}</Link>
                             <CKEditor
                                 editor={ClassicEditor}
                                 data={item.Body.slice(0, 250) + '...'}

@@ -78,8 +78,8 @@ const App = () => {
                 <Route exact path='/' component={Home} />
                 <Route exact path='/jadwal-dokter' render={() => <JadwalDokterUser auth={auth} />} />
                 <Route exact path='/info-kesehatan' component={InfoKesehatan} />
-                <Route path='/admin-page/info-kesehatan/detail/' render={() => <ArtikelDetail />} />
-                <Route path='/kontak' render={() => <Kontak />} />
+                <Route path='/info-kesehatan/detail/' render={() => <ArtikelDetail />} />
+                <Route path='/kontak' render={() => <Kontak authenticated={auth} />} />
                 {auth ? null : <Route path='/masuk' render={() => <Masuk />} />}
                 {auth ? null : <Route path='/daftar' render={() => <BuatAkun />} />}
                 {auth ? <Route path='/Jadwal-Konsultasi/' render={() => <JadwalKonsultasi />} /> : null}

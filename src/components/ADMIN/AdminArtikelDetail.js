@@ -4,11 +4,10 @@ import 'firebase/firestore';
 import { message, Card } from 'antd';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import './ArtikelDetail.modules.scss';
 
-const ArtikelDetail = () => {
+const AdminArtikelDetail = () => {
     useEffect(() => {
-        const path = window.location.pathname.slice(23, window.location.pathname.length);
+        const path = window.location.pathname.slice(34, window.location.pathname.length);
         firebase.firestore().collection('semua_artikel').doc(path).get()
             .then((snap) => {
                 setItem(snap.data());
@@ -24,6 +23,7 @@ const ArtikelDetail = () => {
 
     const [item, setItem] = useState();
     const [loading, setLoading] = useState(true);
+
 
 
     return (
@@ -65,4 +65,4 @@ const ArtikelDetail = () => {
     );
 }
 
-export default ArtikelDetail;
+export default AdminArtikelDetail;
