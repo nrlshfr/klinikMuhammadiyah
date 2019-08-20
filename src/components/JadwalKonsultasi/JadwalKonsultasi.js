@@ -41,6 +41,7 @@ const JadwalKonsultasi = () => {
                         <p>Nama Dokter: {userData.jadwalKonsultasi.namaDokter === '' ? '-' : userData.jadwalKonsultasi.namaDokter}</p>
                         <p>Poli: {userData.jadwalKonsultasi.Poli === '' ? '-' : userData.jadwalKonsultasi.Poli}</p>
                         {urutan.map((item, index) => item === firebase.auth().currentUser.displayName ? <p key={index}>Urutan: {index + 1}</p> : null)}
+                        <p>Pada hari: {userData.jadwalKonsultasi.hari === '' ? '-' : userData.jadwalKonsultasi.hari}</p>
                         <p style={{ fontSize: 8, fontWeight: 'bolder', position: 'absolute', bottom: 0 }}>*Data ini akan diatur ulang pada pukul 00:00</p>
                     </div>
                 </Card>

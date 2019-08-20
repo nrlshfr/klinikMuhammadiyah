@@ -94,7 +94,7 @@ const JadwalDokterUser = ({ auth }) => {
                             if (item !== new Date().getDay()) {
 
                             } else {
-                                return listSudahJanji !== '' ? index.ID === listSudahJanji ?
+                                return listSudahJanji !== '' && listSudahJanji !== undefined ? index.ID === listSudahJanji ?
                                     <Popconfirm title='Batalkan pendaftaran dengan dokter ini?' onConfirm={() => batalJanji(index)}>
                                         <Button
                                             style={{ margin: '0 auto' }} type='danger'>Batalkan Pendaftaran</Button>
@@ -129,6 +129,9 @@ const JadwalDokterUser = ({ auth }) => {
         setLoadingModal(true);
         const refDokter = firebase.firestore().collection('nama_dokter').doc(modalData.ID);
         const refPasien = firebase.firestore().collection('data_pasien').doc(firebase.auth().currentUser.uid);
+        const d = new Date();
+        const namaHari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const hari = namaHari[d.getDay() - 1];
 
         refDokter.get().then(snap => {
             const sample = snap.data().semua_pasien;
@@ -140,7 +143,8 @@ const JadwalDokterUser = ({ auth }) => {
                             jadwalKonsultasi: {
                                 namaDokter: modalData.Nama,
                                 Poli: modalData.Poli,
-                                DokterID: modalData.ID
+                                DokterID: modalData.ID,
+                                hari: hari
                             }
                         }, { merge: true })
                     })
@@ -175,7 +179,7 @@ const JadwalDokterUser = ({ auth }) => {
                             firebase.firestore().collection('data_pasien').doc(firebase.auth().currentUser.uid)
                                 .set({
                                     jadwalKonsultasi: {
-                                        DokterID: '', Poli: '', namaDokter: ''
+                                        DokterID: '', Poli: '', namaDokter: '', hari: ''
                                     }
                                 }, { merge: true })
                                 .then(() => getJadwal())

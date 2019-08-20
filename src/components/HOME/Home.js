@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Home.modules.scss';
-import { Row, Col, Icon, Card, message, Divider } from 'antd';
+import { Row, Col, Icon, Card, message, Divider, Carousel } from 'antd';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import CKEditor from '@ckeditor/ckeditor5-react';
@@ -44,6 +44,33 @@ const Home = () => {
             title: 'Laboratorium',
             body: 'Terpercaya dengan harga terjangkau',
             icon: 'experiment'
+        }
+    ]
+
+    const layanan = [
+        {
+            title: 'NAMA POLI',
+            body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas in, obcaecati labore vero officiis corporis minus doloremque eius, non facilis veritatis fugiat vel numquam. Tempora asperiores quam sapiente quaerat sed!',
+            img: home2,
+            idPoli: 'namapoli'
+        },
+        {
+            title: 'NAMA POLI',
+            body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas in, obcaecati labore vero officiis corporis minus doloremque eius, non facilis veritatis fugiat vel numquam. Tempora asperiores quam sapiente quaerat sed!',
+            img: home2,
+            idPoli: 'namapoli'
+        },
+        {
+            title: 'NAMA POLI',
+            body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas in, obcaecati labore vero officiis corporis minus doloremque eius, non facilis veritatis fugiat vel numquam. Tempora asperiores quam sapiente quaerat sed!',
+            img: home2,
+            idPoli: 'namapoli'
+        },
+        {
+            title: 'NAMA POLI',
+            body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas in, obcaecati labore vero officiis corporis minus doloremque eius, non facilis veritatis fugiat vel numquam. Tempora asperiores quam sapiente quaerat sed!',
+            img: home2,
+            idPoli: 'namapoli'
         }
     ]
 
@@ -121,9 +148,25 @@ const Home = () => {
                     </div>
                 </Row>
 
-                <Row>
-                    <div>
-                        <h1 style={{ fontSize: 44 }}>Info Layanan</h1>
+                <Row style={{ marginBottom: 20 }}>
+                    <div style={{ width: '70%', margin: '0 auto' }}>
+                        <h1 style={{ fontSize: 44, textAlign: 'center' }}>LAYANAN</h1>
+
+                        <Carousel effect="scrollx" autoplay={true} autoplaySpeed={3000} draggable>
+                            {layanan.map((item, index) => (
+                                <div className='l1' key={index}>
+                                    <div>
+                                        <img src={item.img} alt="" />
+                                    </div>
+                                    <div className='lDesc'>
+                                        <h3>{item.title}</h3>
+                                        <p>
+                                            {item.body}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </Carousel>
                     </div>
                 </Row>
 
