@@ -16,6 +16,7 @@ import InputData from './InputData';
 import Layanan from './Layanan';
 import Obat from './Obat';
 import AdminArtikelDetail from './AdminArtikelDetail';
+import TambahInfoLayanan from './TambahInfoLayanan';
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer } = Layout;
@@ -102,6 +103,26 @@ const AdminPage = () => {
 
                             <SubMenu title={
                                 <span className="submenu-title-wrapper">
+                                    <Icon type="info" />
+                                    Info Layanan
+                         </span>
+                            }>
+                                <Menu.ItemGroup>
+                                    <Menu.Item key="/admin-page/tambah-layanan">
+                                        <Link to='/admin-page/tambah-layanan'>
+                                            Tambah Layanan
+                                </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="/admin-page/semua-layanan">
+                                        <Link to='/admin-page/semua-layanan'>
+                                            Semua Layanan
+                                </Link>
+                                    </Menu.Item>
+                                </Menu.ItemGroup>
+                            </SubMenu>
+
+                            <SubMenu title={
+                                <span className="submenu-title-wrapper">
                                     <Icon type="book" />
                                     Invoice
                          </span>
@@ -174,6 +195,7 @@ const AdminPage = () => {
 
                         <Route path='/admin-page/jadwal-dokter' render={() => <JadwalDokter />} />
                         <Route path='/admin-page/tambah-dokter' render={() => <TambahDokter />} />
+                        <Route path='/admin-page/tambah-layanan' render={() => <TambahInfoLayanan />} />
                         <Route path='/admin-page/buat-artikel' render={() => <BuatArtikel />} />
                         <Route path='/admin-page/invoice' render={() => <Invoice />} />
                         <Route path='/admin-page/buat-invoice' render={() => <BuatInvoice />} />

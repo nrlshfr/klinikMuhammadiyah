@@ -19,6 +19,7 @@ import Kontak from './components/KONTAK/Kontak';
 import Masuk from './components/AUTH/Masuk';
 import BuatAkun from './components/AUTH/BuatAkun';
 import JadwalKonsultasi from './components/JadwalKonsultasi/JadwalKonsultasi';
+import Layanan from './components/LAYANAN/Layanan';
 
 
 
@@ -77,6 +78,7 @@ const App = () => {
                 {currentPath === '/admin' ? null : <Navbar auth={auth} />}
                 <Route exact path='/' component={Home} />
                 <Route exact path='/jadwal-dokter' render={() => <JadwalDokterUser auth={auth} />} />
+                <Route exact path='/layanan-user' render={() => <Layanan />} />
                 <Route exact path='/info-kesehatan' component={InfoKesehatan} />
                 <Route path='/info-kesehatan/detail/' render={() => <ArtikelDetail />} />
                 <Route path='/kontak' render={() => <Kontak authenticated={auth} />} />

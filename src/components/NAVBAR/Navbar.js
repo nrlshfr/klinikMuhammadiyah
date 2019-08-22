@@ -88,6 +88,9 @@ const Navbar = ({ auth }) => {
                         <NavLink activeClassName='navActive' to='/jadwal-dokter'>Dokter</NavLink>
                     </li>
                     <li>
+                        <NavLink activeClassName='navActive' to='/layanan-user'>Layanan</NavLink>
+                    </li>
+                    <li>
                         <NavLink activeClassName='navActive' to='/info-kesehatan'> Info Kesehatan</NavLink>
                     </li>
                     <li>
@@ -128,6 +131,9 @@ const Navbar = ({ auth }) => {
                 </li>
                 <li style={{ padding: '10px 0', textAlign: 'center' }} onClick={() => setMobileNav(false)}>
                     <NavLink activeClassName='navActive' to='/jadwal-dokter'>Dokter</NavLink>
+                </li>
+                <li style={{ padding: '10px 0', textAlign: 'center' }} onClick={() => setMobileNav(false)}>
+                    <NavLink activeClassName='navActive' to='/layanan-user'>Layanan</NavLink>
                 </li>
                 <li style={{ padding: '10px 0', textAlign: 'center' }} onClick={() => setMobileNav(false)}>
                     <NavLink activeClassName='navActive' to='/info-kesehatan'> Info Kesehatan</NavLink>

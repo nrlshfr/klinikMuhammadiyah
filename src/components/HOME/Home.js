@@ -19,6 +19,7 @@ const Home = () => {
         })
 
         getInfoKesehatan();
+        getLayanan();
     }, [])
 
     const [scrollPos, setScrollpos] = useState(0);
@@ -47,32 +48,7 @@ const Home = () => {
         }
     ]
 
-    const layanan = [
-        {
-            title: 'NAMA POLI',
-            body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas in, obcaecati labore vero officiis corporis minus doloremque eius, non facilis veritatis fugiat vel numquam. Tempora asperiores quam sapiente quaerat sed!',
-            img: home2,
-            idPoli: 'namapoli'
-        },
-        {
-            title: 'NAMA POLI',
-            body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas in, obcaecati labore vero officiis corporis minus doloremque eius, non facilis veritatis fugiat vel numquam. Tempora asperiores quam sapiente quaerat sed!',
-            img: home2,
-            idPoli: 'namapoli'
-        },
-        {
-            title: 'NAMA POLI',
-            body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas in, obcaecati labore vero officiis corporis minus doloremque eius, non facilis veritatis fugiat vel numquam. Tempora asperiores quam sapiente quaerat sed!',
-            img: home2,
-            idPoli: 'namapoli'
-        },
-        {
-            title: 'NAMA POLI',
-            body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas in, obcaecati labore vero officiis corporis minus doloremque eius, non facilis veritatis fugiat vel numquam. Tempora asperiores quam sapiente quaerat sed!',
-            img: home2,
-            idPoli: 'namapoli'
-        }
-    ]
+    const [layanan, setLayanan] = useState([]);
 
     const getInfoKesehatan = () => {
         const data = [];
@@ -80,6 +56,15 @@ const Home = () => {
             .then(snap => snap.forEach(child => data.push(child.data())))
             .then(() => {
                 setInfoKesehatan(data);
+            })
+            .catch(err => message.error(err.message))
+    }
+    const getLayanan = () => {
+        const data = [];
+        firebase.firestore().collection('info_layanan').limit(4).get()
+            .then(snap => snap.forEach(child => data.push(child.data())))
+            .then(() => {
+                setLayanan(data);
             })
             .catch(err => message.error(err.message))
     }
@@ -152,16 +137,16 @@ const Home = () => {
                     <div style={{ width: '70%', margin: '0 auto' }}>
                         <h1 style={{ fontSize: 44, textAlign: 'center' }}>LAYANAN</h1>
 
-                        <Carousel effect="scrollx" autoplay={true} autoplaySpeed={3000} draggable>
+                        <Carousel dotPosition='right' effect="scrollx" autoplay={true} autoplaySpeed={3000} draggable>
                             {layanan.map((item, index) => (
                                 <div className='l1' key={index}>
                                     <div>
-                                        <img src={item.img} alt="" />
+                                        <img src={item.layananImg} alt="" />
                                     </div>
                                     <div className='lDesc'>
-                                        <h3>{item.title}</h3>
+                                        <h3>{item.namaLayanan}</h3>
                                         <p>
-                                            {item.body}
+                                            {item.deskripsiLayanan}
                                         </p>
                                     </div>
                                 </div>
