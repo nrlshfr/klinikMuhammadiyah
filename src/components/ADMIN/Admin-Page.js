@@ -113,11 +113,6 @@ const AdminPage = () => {
                                             Tambah Layanan
                                 </Link>
                                     </Menu.Item>
-                                    <Menu.Item key="/admin-page/semua-layanan">
-                                        <Link to='/admin-page/semua-layanan'>
-                                            Semua Layanan
-                                </Link>
-                                    </Menu.Item>
                                 </Menu.ItemGroup>
                             </SubMenu>
 
