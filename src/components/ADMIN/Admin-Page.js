@@ -103,21 +103,6 @@ const AdminPage = () => {
 
                             <SubMenu title={
                                 <span className="submenu-title-wrapper">
-                                    <Icon type="info" />
-                                    Info Layanan
-                         </span>
-                            }>
-                                <Menu.ItemGroup>
-                                    <Menu.Item key="/admin-page/tambah-layanan">
-                                        <Link to='/admin-page/tambah-layanan'>
-                                            Tambah Layanan
-                                </Link>
-                                    </Menu.Item>
-                                </Menu.ItemGroup>
-                            </SubMenu>
-
-                            <SubMenu title={
-                                <span className="submenu-title-wrapper">
                                     <Icon type="book" />
                                     Invoice
                          </span>

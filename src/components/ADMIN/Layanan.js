@@ -23,6 +23,11 @@ const Layanan = () => {
             key: 'namaLayanan',
         },
         {
+            title: 'Deskripsi Layanan',
+            dataIndex: 'deskripsiLayanan',
+            key: 'deskripsiLayanan',
+        },
+        {
             title: 'Harga Layanan',
             dataIndex: 'hargaLayanan',
             key: 'hargaLayanan',

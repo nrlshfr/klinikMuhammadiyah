@@ -61,7 +61,7 @@ const Home = () => {
     }
     const getLayanan = () => {
         const data = [];
-        firebase.firestore().collection('info_layanan').limit(4).get()
+        firebase.firestore().collection('daftar_harga').where('Kategori', '==', 'Layanan').orderBy('namaLayanan').limit(4).get()
             .then(snap => snap.forEach(child => data.push(child.data())))
             .then(() => {
                 setLayanan(data);
@@ -120,6 +120,8 @@ const Home = () => {
                     </Col>
                 </Row>
 
+                <h1 style={{ fontSize: 44, textAlign: 'center' }}>LAYANAN</h1>
+
                 <Row className='section3'>
                     <div className='framePoliLayanan' style={{
                         minHeight: '50vh', backgroundImage: `url(${home3})`
@@ -135,7 +137,6 @@ const Home = () => {
 
                 <Row style={{ marginBottom: 20 }}>
                     <div style={{ width: '70%', margin: '0 auto' }}>
-                        <h1 style={{ fontSize: 44, textAlign: 'center' }}>LAYANAN</h1>
 
                         <Carousel dotPosition='right' effect="scrollx" autoplay={true} autoplaySpeed={3000} draggable>
                             {layanan.map((item, index) => (
@@ -144,8 +145,8 @@ const Home = () => {
                                         <img src={item.layananImg} alt="" />
                                     </div>
                                     <div className='lDesc'>
-                                        <h3>{item.namaLayanan}</h3>
-                                        <p>
+                                        <h3 style={{ textAlign: 'left' }}>{item.namaLayanan}</h3>
+                                        <p style={{ textAlign: 'justify' }}>
                                             {item.deskripsiLayanan}
                                         </p>
                                     </div>
